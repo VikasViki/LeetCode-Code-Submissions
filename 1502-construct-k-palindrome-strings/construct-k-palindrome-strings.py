@@ -10,14 +10,10 @@ class Solution:
         freq = {}
         for char in s:
             freq[char] = freq.get(char, 0) + 1
-        
-        pairs = 0 # Number of pairs that can be used as separate palindrome
+
         odds = 0
         for char, count in freq.items():
-            if count % 2 == 0:
-                pairs += (count // 2)
-            else:
-                pairs += (count // 2)
+            if count % 2 != 0:
                 odds += 1
         
         if odds > k:
