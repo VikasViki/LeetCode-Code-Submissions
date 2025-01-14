@@ -1,11 +1,18 @@
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
-        common_prefix = []
-        a_set = set()
-        b_set = set()
-        for a_ele, b_ele in zip(A, B):
-            a_set.add(a_ele)
-            b_set.add(b_ele)
-            common = set.intersection(a_set, b_set)
-            common_prefix.append(len(common))
-        return common_prefix
+        freq = {}
+        prefix_commons = []
+        common = 0
+        
+        for char_a, char_b in zip(A, B):
+            freq[char_a] = freq.get(char_a, 0) + 1
+            if freq[char_a] == 2:
+                common += 1
+            
+            freq[char_b] = freq.get(char_b, 0) + 1
+            if freq[char_b] == 2:
+                common += 1
+            
+            prefix_commons.append(common)
+        
+        return prefix_commons
