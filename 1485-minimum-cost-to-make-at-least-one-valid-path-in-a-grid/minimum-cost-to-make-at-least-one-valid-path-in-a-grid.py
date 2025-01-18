@@ -14,24 +14,25 @@ class Solution:
 
         while queue:
             row, col, cost = queue.popleft()
+
+            if (row, col) == (total_rows-1, total_cols-1):
+                return cost
             
-            for d in self._directions:
-                d_row, d_col = self._directions[d]
+            for d, (d_row, d_col) in self._directions.items():
                 new_row, new_col = row + d_row, col + d_col
                 new_cost = cost if grid[row][col] == d else cost+1
 
                 if (
-                    new_row < 0 or new_col < 0 or \
-                    new_row == total_rows or new_col == total_cols or \
-                    new_cost >= min_cost.get((new_row, new_col), float('inf'))
+                    0 <= new_row < total_rows and \
+                    0 <= new_col < total_cols and \
+                    new_cost < min_cost.get((new_row, new_col), float('inf'))
                 ):
-                    continue
                 
-                min_cost[(new_row, new_col)] = new_cost
+                    min_cost[(new_row, new_col)] = new_cost
 
-                if grid[new_row][new_col] == d:
-                    queue.appendleft((new_row, new_col, new_cost))
-                else:
-                    queue.append((new_row, new_col, new_cost))
+                    if grid[row][col] == d:
+                        queue.appendleft((new_row, new_col, new_cost))
+                    else:
+                        queue.append((new_row, new_col, new_cost))
         
-        return min_cost[(total_rows-1, total_cols-1)]
+        return -1
