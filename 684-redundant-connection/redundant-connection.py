@@ -4,11 +4,11 @@ class DSU:
         self.rank = [1] * (self.total_nodes+1)
         self.parent = list(range(self.total_nodes+1))
     
-    def _find(self,  node):
-        if self.parent[node] == node:
-            return node
-        self.parent[node] = self._find(self.parent[node])
-        return self.parent[node]
+    def _find(self, node):
+        # Iterative version of the find operation
+        while self.parent[node] != node:
+            node = self.parent[node]
+        return node
     
     def _union(self, node1, node2):
         node1 = self._find(node1)
