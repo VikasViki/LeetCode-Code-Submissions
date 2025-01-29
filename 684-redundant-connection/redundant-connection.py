@@ -5,8 +5,11 @@ class DSU:
         self.parent = list(range(self.total_nodes+1))
     
     def _find(self, node):
-        # Iterative version of the find operation
+        # Iterative find with path compression
         while self.parent[node] != node:
+            # Path compression: point the current node directly to its root
+            parent_node = self.parent[node]
+            self.parent[node] = self.parent[parent_node]
             node = self.parent[node]
         return node
     
