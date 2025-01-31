@@ -42,7 +42,7 @@ class Solution:
                     else:
                         water_cells.append((row, col))
         
-        print(self.island_size)
+        # print(self.island_size)
         
         for row, col in water_cells:
             neighbor_islands = {}
