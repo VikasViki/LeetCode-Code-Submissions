@@ -31,7 +31,7 @@ class Solution:
         water_cells = []
         island_num = 1
         largest_island = 0
-        
+
         for row in range(self.total_rows):
             for col in range(self.total_cols):
                 if (row, col) not in self.visited:
@@ -56,9 +56,3 @@ class Solution:
             largest_island = max(largest_island, merged_island)
         
         return largest_island
-
-
-
-
-
-
