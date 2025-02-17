@@ -1,21 +1,17 @@
+from itertools import combinations, permutations
+
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
-        char_count = [0] * 26
-        for char in tiles:
-            char_count[ord(char)-ord("A")] += 1
+        tiles_len = len(tiles)
+        all_combinations = []
+        for comb_len in range(1, tiles_len+1):
+            for comb in combinations(tiles, comb_len):
+                all_combinations.append(comb)
         
-        return self._find_subsequences(char_count)
-    
-    def _find_subsequences(self, char_count: list) -> int:
-        total = 0
-
-        for pos in range(26):
-            if char_count[pos] == 0:
-                continue
-            
-            total += 1
-            char_count[pos] -= 1
-            total += self._find_subsequences(char_count)
-            char_count[pos] += 1
+        sequences = set()
+        for comb in all_combinations:
+            for perm in permutations(comb):
+                sequences.add("".join(perm))
         
-        return total
+        return len(sequences)
+        
