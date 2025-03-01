@@ -3,7 +3,7 @@ class Solution:
     def is_out_of_bound(self, row, col):
         return (not (0 <= row < self.total_rows)) or (not (0 <= col < self.total_cols))
 
-    def get_max_cherries(self, r1_row, r1_col, r2_row, r2_col, r1_score, r2_score):
+    def get_max_cherries(self, r1_row, r1_col, r2_row, r2_col):
         if self.is_out_of_bound(r1_row, r1_col):
             return 0
         if self.is_out_of_bound(r2_row, r2_col):
@@ -15,7 +15,10 @@ class Solution:
             return self.memo[key]
 
         if (r1_row == self.total_rows and r2_row == total_cols):
+            r1_score = self.grid[r1_row][r1_col]
+            r2_score = self.grid[r2_row][r2_col] if (r1_row, r1_col) != (r2_row, r2_col) else 0
             return r1_score + r2_score
+
         
         max_score = 0
 
@@ -24,7 +27,7 @@ class Solution:
                 r1_cell = self.grid[r1_row][r1_col]
                 r2_cell = self.grid[r2_row][r2_col] if (r1_row, r1_col) != (r2_row, r2_col) else 0
                 curr_score = r1_cell + r2_cell + \
-                self.get_max_cherries(r1_row+1, new_r1_col, r2_row+1, new_r2_col, r1_score, r2_score)
+                self.get_max_cherries(r1_row+1, new_r1_col, r2_row+1, new_r2_col)
                 max_score = max(curr_score, max_score)
         
         self.memo[key] = max_score
@@ -36,5 +39,5 @@ class Solution:
         self.grid = grid
         self.total_rows = len(self.grid)
         self.total_cols = len(self.grid[0])
-        max_score = self.get_max_cherries(0, 0, 0, self.total_cols-1, 0, 0)
+        max_score = self.get_max_cherries(0, 0, 0, self.total_cols-1)
         return max_score
