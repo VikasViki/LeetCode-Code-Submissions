@@ -13,12 +13,6 @@ class Solution:
 
         if key in self.memo:
             return self.memo[key]
-
-        if (r1_row == self.total_rows and r2_row == total_cols):
-            r1_score = self.grid[r1_row][r1_col]
-            r2_score = self.grid[r2_row][r2_col] if (r1_row, r1_col) != (r2_row, r2_col) else 0
-            return r1_score + r2_score
-
         
         max_score = 0
 
