@@ -15,6 +15,11 @@ class Solution:
                 return True
             else:
                 return False
+
+        memo_key = (index, subseq_sum)
+        
+        if memo_key in self.memo:
+            return self.memo[memo_key]
         
         # Include curr value
         include = self.check_subsequence_sum(index+1, n, subseq_sum+self.values[index])
@@ -22,10 +27,13 @@ class Solution:
         # Exclude curr value
         exclude = self.check_subsequence_sum(index+1, n, subseq_sum)
 
-        return include or exclude
+        self.memo[memo_key] = include or exclude
+
+        return self.memo[memo_key]
 
 
     def checkPowersOfThree(self, n: int) -> bool:
+        self.memo = {}
         return self.check_subsequence_sum(0, n, 0)
 
     
