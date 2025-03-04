@@ -10,11 +10,11 @@ class Solution:
         self.values_len = len(self.values)
 
     def check_subsequence_sum(self, index, n, subseq_sum):
+        if subseq_sum == n:
+            return True
+
         if index == self.values_len:
-            if subseq_sum == n:
-                return True
-            else:
-                return False
+            return False
 
         memo_key = (index, subseq_sum)
         
