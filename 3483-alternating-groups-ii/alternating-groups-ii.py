@@ -1,25 +1,18 @@
 class Solution:
     def numberOfAlternatingGroups(self, colors: List[int], k: int) -> int:
-        queue = deque([])
-        colors = colors + colors[:k-1]
+        colors = colors + colors[:k]
         groups = 0
+        start = 0
 
-        for index, color in enumerate(colors):
-            if not queue:
-                queue.append((color, index))
+        for index, color in enumerate(colors[1:], start=1):
+            if colors[index] == colors[index-1]:
+                start = index-1
             else:
-                if queue[-1][0] != color:
-                    queue.append((color, index))
-                else:
-                    queue = deque([(color, index)])
+                if index - start < k:
+                    continue
             
-            
-            while queue and queue[-1][1] - queue[0][1] > k-1:
-                queue.popleft()
-            
-            if queue and queue[-1][1] - queue[0][1] == k-1:
+            if index - start == k:
                 groups += 1
-            
-            # print(index, queue, groups)
+                start += 1
         
         return groups
