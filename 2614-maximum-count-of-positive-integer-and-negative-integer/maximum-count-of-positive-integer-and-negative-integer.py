@@ -1,11 +1,7 @@
 class Solution:
     def maximumCount(self, nums: List[int]) -> int:
-        positive = 0
-        negative = 0
-        for num in nums:
-            if num < 0:
-                negative += 1
-            elif num > 0:
-                positive += 1
+        last_negative = bisect_left(nums, 0)
+        first_positive = bisect_right(nums, 0)
+        nums_len = len(nums)
+        return max(last_negative, nums_len-first_positive)
         
-        return max(positive, negative)
