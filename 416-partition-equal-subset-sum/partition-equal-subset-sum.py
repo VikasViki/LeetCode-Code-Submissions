@@ -1,14 +1,21 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        @lru_cache(maxsize=None)
+        memo = {}
+
         def dfs(nums: Tuple[int], n: int, subset_sum: int) -> bool:
             # Base cases
+            key = (n, subset_sum) 
+            if key in memo:
+                return memo[key]
+
             if subset_sum == 0:
                 return True
             if n == 0 or subset_sum < 0:
                 return False
             result = (dfs(nums, n - 1, subset_sum - nums[n - 1])
                     or dfs(nums, n - 1, subset_sum))
+
+            memo[key] = result
             return result
 
         # find sum of array elements
