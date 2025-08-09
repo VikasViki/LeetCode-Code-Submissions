@@ -12,14 +12,14 @@ class TopVotedCandidate:
                 leading_person = person
             self.leading.append(leading_person)
         
-        print(self.leading)
+        # print(self.leading)
     
     def get_time_index(self, curr_time):
         return bisect_right(self.times, curr_time)-1  
 
     def q(self, t: int) -> int:
         index = self.get_time_index(t)
-        print(t, index, self.leading[index])
+        # print(t, index, self.leading[index])
         return self.leading[index]
         
 
