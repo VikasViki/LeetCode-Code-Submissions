@@ -28,7 +28,7 @@ for num in range(2, 100001):
 
 class Solution:
     def sumFourDivisors(self, nums: List[int]) -> int:
-        print(four_divisors_sum)
+        # print(four_divisors_sum)
         sum_of_divisors = 0
         for num in nums:
             sum_of_divisors += four_divisors_sum.get(num, 0)
