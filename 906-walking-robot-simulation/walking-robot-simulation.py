@@ -35,7 +35,7 @@ class Solution:
             else:
                 self.curr_direction, self.dx, self.dy = self.next_direction.get((self.curr_direction, command))
             
-            euclidean_distance = robot_x*robot_x + robot_y*robot_y
+            euclidean_distance = robot_x**2 + robot_y**2
             max_euclidean_distance = max(max_euclidean_distance, euclidean_distance)
         
         return max_euclidean_distance
